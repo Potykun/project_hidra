@@ -1,4 +1,65 @@
 //====================================================================================================
+.header {
+   // .header__container
+
+   &__container {
+      color: #fff;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+
+   // .header__logo
+
+   &__logo {
+   }
+
+   // .header__menu
+
+   &__menu {
+   }
+
+   // .header__btn
+
+   &__btn {
+      display: flex;
+      align-items: center;
+   }
+}
+.menu {
+   display: flex;
+   align-items: center;
+   // .menu__icon
+
+   &__icon {
+   }
+
+   // .menu__body
+
+   &__body {
+   }
+
+   // .menu__list
+
+   &__list {
+      display: flex;
+      align-items: center;
+      @include adaptiveValue("column-gap", 42, 20);
+   }
+
+   // .menu__item
+
+   &__item {
+   }
+
+   // .menu__link
+
+   &__link {
+   }
+}
+.icon-menu {
+}
 
 //====================================================================================================
 

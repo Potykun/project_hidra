@@ -66,6 +66,7 @@ body {
       touch-action: none;
       overscroll-behavior: none;
    }
+   background-color: $mainColor;
 
    // Сайт завантажений
    .loaded & {
