@@ -5,7 +5,7 @@
 
 // Підключення шрифтів ============================================
 //&display=swap - додати при підключенні через плагін
-
+@import url("https://fonts.googleapis.com/css?family=Montserrat:,300,regular,700&display=swap");
 // Підключити, якщо є локальні файли шрифтів
 //@import "fonts/fonts";
 
@@ -18,20 +18,21 @@
 // ================================================================
 
 // За замовчуванням шрифт =========================================
-$fontFamily: "";
-$fontSize: rem(14); // де 14(px) - розмір шрифту за замовчуванням з макету
+$fontFamily: "Montserrat";
+$fontSize: rem(16); // де 14(px) - розмір шрифту за замовчуванням з макету
 
 // Основні кольори
-$mainColor: #000; // Колір шрифту за замовчуванням
+$mainColor: #302c42; // Колір шрифту за замовчуванням
+$mainColorLight: #c0b7e8;
 
 // Налаштування адаптивної сітки ==================================
 
 // Мінімальна ширина сторінки
 $minWidth: 320;
 // Ширина полотна (макету)
-$maxWidth: 1920;
+$maxWidth: 1440;
 // Ширина обмежуючого контейнера (0 = немає обмеження)
-$maxWidthContainer: 1170;
+$maxWidthContainer: 1272;
 // Загальний відступ у контейнера
 // (30 = по 15px ліворуч і праворуч, 0 = немає відступу)
 $containerPadding: 30;
@@ -59,38 +60,38 @@ $responsiveType: 1;
 // Стилі тега BODY ================================================
 
 body {
+   // Скролл заблоковано
+   .lock & {
+      overflow: hidden;
+      touch-action: none;
+      overscroll-behavior: none;
+   }
 
-	// Скролл заблоковано
-	.lock & {
-		overflow: hidden;
-		touch-action: none;
-		overscroll-behavior: none;
-	}
-
-	// Сайт завантажений
-	.loaded & {}
+   // Сайт завантажений
+   .loaded & {
+   }
 }
 
 // Оболонка wrapper ===============================================
 .wrapper {
-	min-height: 100%;
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
+   min-height: 100%;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
 
-	@supports (overflow: clip) {
-		overflow: clip;
-	}
+   @supports (overflow: clip) {
+      overflow: clip;
+   }
 
-	// Притискаємо footer
-	>main {
-		flex: 1 1 auto;
-	}
+   // Притискаємо footer
+   > main {
+      flex: 1 1 auto;
+   }
 
-	// Фікс для слайдерів
-	>* {
-		min-width: 0;
-	}
+   // Фікс для слайдерів
+   > * {
+      min-width: 0;
+   }
 }
 
 // Обмежуючий контейнер ===========================================
@@ -102,59 +103,51 @@ body {
 Сніппет (HTML): cnt
 */
 @if ($responsiveType==1) {
+   // Чуйна
+   [class*="__container"] {
+      @if ($maxWidthContainer>0) {
+         max-width: rem($containerWidth);
+         margin: 0 auto;
+      }
 
-	// Чуйна
-	[class*="__container"] {
-		@if ($maxWidthContainer>0) {
-			max-width: rem($containerWidth);
-			margin: 0 auto;
-		}
+      @if ($containerPadding>0) {
+         @if ($maxWidthContainer>0) {
+            padding: 0 rem(math.div($containerPadding, 2));
+         } @else {
+            @include adaptiveValue("padding-left", math.div($containerPadding, 2), 15);
+            @include adaptiveValue("padding-right", math.div($containerPadding, 2), 15);
+         }
+      }
+   }
+} @else {
+   // Брейк-поїнтами
+   [class*="__container"] {
+      margin: 0 auto;
 
-		@if ($containerPadding>0) {
-			@if ($maxWidthContainer>0) {
-				padding: 0 rem(math.div($containerPadding, 2));
-			}
+      @if ($maxWidthContainer>0) {
+         max-width: rem($containerWidth);
+      } @else {
+         @if ($containerPadding>0) {
+            padding: 0 rem(math.div($containerPadding, 2));
+         }
+      }
 
-			@else {
-				@include adaptiveValue("padding-left", math.div($containerPadding, 2), 15);
-				@include adaptiveValue("padding-right", math.div($containerPadding, 2), 15);
-			}
-		}
-	}
-}
+      @media (max-width: $pc) {
+         max-width: rem(970);
+      }
 
-@else {
+      @media (max-width: $tablet) {
+         max-width: rem(750);
+      }
 
-	// Брейк-поїнтами
-	[class*="__container"] {
-		margin: 0 auto;
+      @media (max-width: $mobile) {
+         max-width: none;
 
-		@if ($maxWidthContainer>0) {
-			max-width: rem($containerWidth);
-		}
-
-		@else {
-			@if ($containerPadding>0) {
-				padding: 0 rem(math.div($containerPadding, 2));
-			}
-		}
-
-		@media (max-width: $pc) {
-			max-width: rem(970);
-		}
-
-		@media (max-width: $tablet) {
-			max-width: rem(750);
-		}
-
-		@media (max-width: $mobile) {
-			max-width: none;
-
-			@if ($containerPadding>0 and $maxWidthContainer>0) {
-				padding: 0 rem(math.div($containerPadding, 2));
-			}
-		}
-	}
+         @if ($containerPadding>0 and $maxWidthContainer>0) {
+            padding: 0 rem(math.div($containerPadding, 2));
+         }
+      }
+   }
 }
 
 // Підключення базових стилів, шаблонів (заготівель) та допоміжних класів
